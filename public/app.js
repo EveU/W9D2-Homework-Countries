@@ -11,7 +11,7 @@ window.onload = function(){
   var url = 'https://restcountries.eu/rest/v1';
   var request = new XMLHttpRequest();
 
-  request.open("GET", url);
+  var countryToDisplay = JSON.parse(localStorage.getItem('storedCountry')) || {};
 
   // Create drop down menu
   var option = document.createElement("option");
@@ -25,6 +25,29 @@ window.onload = function(){
   select.appendChild(option);
   var body = document.getElementsByTagName('body')[0];
   body.appendChild(select);
+
+  // Display persisted country info 
+  var body = document.getElementsByTagName('body')[0];
+  var section = document.createElement("section");
+  body.appendChild(section);
+  var countryName = document.createElement("h1");
+  var population = document.createElement("p");
+  var capitalCity = document.createElement("p");
+  
+  if(countryToDisplay != {}){
+
+      var country = countryToDisplay;
+
+      countryName.innerText = country.name;
+      population.innerText = "Population: " + country.population;
+      capitalCity.innerText = "Capital City: " + country.capital;
+
+      section.appendChild(countryName);
+      section.appendChild(population);
+      section.appendChild(capitalCity);
+  }
+
+  request.open("GET", url);
 
   request.onload = function(){
     if(request.status === 200){
@@ -40,27 +63,28 @@ window.onload = function(){
         countrySelect.appendChild(option);
       }
 
-    var section = document.createElement("section");
-    body.appendChild(section);
-    var countryName = document.createElement("h1");
-    var population = document.createElement("p");
-    var capitalCity = document.createElement("p");
+      // var section = document.createElement("section");
+      // body.appendChild(section);
+      // var countryName = document.createElement("h1");
+      // var population = document.createElement("p");
+      // var capitalCity = document.createElement("p");
 
-    select.onchange = function(){
-      var list = document.getElementById("country-list");
-      var countryIndex = list.options[list.selectedIndex].value;
-      var country = countries[countryIndex];
+      select.onchange = function(){
+        var list = document.getElementById("country-list");
+        var countryIndex = list.options[list.selectedIndex].value;
+        var country = countries[countryIndex];
 
-      countryName.innerText = country.name;
-      population.innerText = "Population: " + country.population;
-      capitalCity.innerText = "Capital City: " + country.capital;
+        countryName.innerText = country.name;
+        population.innerText = "Population: " + country.population;
+        capitalCity.innerText = "Capital City: " + country.capital;
 
-      section.appendChild(countryName);
-      section.appendChild(population);
-      section.appendChild(capitalCity);
-    }
-    
-    
+        section.appendChild(countryName);
+        section.appendChild(population);
+        section.appendChild(capitalCity);
+
+        countryToDisplay = country;
+        localStorage.setItem('storedCountry', JSON.stringify(countryToDisplay));
+      }
     }
   }
 
