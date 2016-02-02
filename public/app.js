@@ -13,25 +13,25 @@ window.onload = function(){
 
   request.open("GET", url);
 
-  // var countries = JSON.parse(localStorage.getItem('countryList')) || [];
+  // Create drop down menu
+  var option = document.createElement("option");
+  option.value = "None";
+  option.innerText = "choose a country";
+  
+  var select = document.createElement("select");
+  select.name = "country-list";
+  select.id = "country-list";
+
+  select.appendChild(option);
+  var body = document.getElementsByTagName('body')[0];
+  body.appendChild(select);
 
   request.onload = function(){
     if(request.status === 200){
       console.log("got the data");
       var countries = JSON.parse(request.responseText) || [];
-      // Make a select drop down with all the countries,
-      var option = document.createElement("option");
-      option.value = "None";
-      option.innerText = "choose a country";
       
-      var select = document.createElement("select");
-      select.name = "country-list";
-      select.id = "country-list";
-
-      select.appendChild(option);
-      var body = document.getElementsByTagName('body')[0];
-      body.appendChild(select);
-      
+      // Add all the countries to the drop down menu
       var countrySelect = document.getElementById('country-list');
       for(country of countries){      
         var option = document.createElement("option");
@@ -47,7 +47,7 @@ window.onload = function(){
 
   // display the country name, population, capital city of the country that is selected.
   var section = document.createElement("section");
-  var body = document.getElementsByTagName('body')[0];
+  section.innerText = "test";
   body.appendChild(section);
 };
 
