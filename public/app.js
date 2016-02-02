@@ -35,20 +35,47 @@ window.onload = function(){
       var countrySelect = document.getElementById('country-list');
       for(country of countries){      
         var option = document.createElement("option");
-        option.value = country.name;
+        option.value = countries.indexOf(country);
         option.innerText = country.name;
         countrySelect.appendChild(option);
       }
 
+    var section = document.createElement("section");
+    body.appendChild(section);
+    var countryName = document.createElement("h1");
+    var population = document.createElement("p");
+    var capitalCity = document.createElement("p");
+
+    select.onchange = function(){
+      var list = document.getElementById("country-list");
+      var countryIndex = list.options[list.selectedIndex].value;
+      var country = countries[countryIndex];
+
+      countryName.innerText = country.name;
+      population.innerText = "Population: " + country.population;
+      capitalCity.innerText = "Capital City: " + country.capital;
+
+      section.appendChild(countryName);
+      section.appendChild(population);
+      section.appendChild(capitalCity);
+    }
+    
+    
     }
   }
 
   request.send(null);
 
   // display the country name, population, capital city of the country that is selected.
-  var section = document.createElement("section");
-  section.innerText = "test";
-  body.appendChild(section);
+
+  // var countries = JSON.parse(request.responseText);
+
+
+
+
+  // <h1>Country Name</h1>
+  // <p>Population: pop</p>
+  // <p>Capital city: cc</p>
 };
 
 
