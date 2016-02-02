@@ -1,5 +1,4 @@
 // Rest Country API Lab/Homework
-// Persist the last country that was selected
 // Style
 // Further: Add new functionality. eg
 
@@ -39,7 +38,7 @@ window.onload = function(){
       var country = countryToDisplay;
 
       countryName.innerText = country.name;
-      population.innerText = "Population: " + country.population;
+      population.innerText = "Population: " + Number(country.population).toLocaleString();
       capitalCity.innerText = "Capital City: " + country.capital;
 
       section.appendChild(countryName);
@@ -63,19 +62,13 @@ window.onload = function(){
         countrySelect.appendChild(option);
       }
 
-      // var section = document.createElement("section");
-      // body.appendChild(section);
-      // var countryName = document.createElement("h1");
-      // var population = document.createElement("p");
-      // var capitalCity = document.createElement("p");
-
       select.onchange = function(){
         var list = document.getElementById("country-list");
         var countryIndex = list.options[list.selectedIndex].value;
         var country = countries[countryIndex];
 
         countryName.innerText = country.name;
-        population.innerText = "Population: " + country.population;
+        population.innerText = "Population: " + Number(country.population).toLocaleString();
         capitalCity.innerText = "Capital City: " + country.capital;
 
         section.appendChild(countryName);
@@ -90,16 +83,6 @@ window.onload = function(){
 
   request.send(null);
 
-  // display the country name, population, capital city of the country that is selected.
-
-  // var countries = JSON.parse(request.responseText);
-
-
-
-
-  // <h1>Country Name</h1>
-  // <p>Population: pop</p>
-  // <p>Capital city: cc</p>
 };
 
 
