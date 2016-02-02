@@ -1,6 +1,4 @@
 // Rest Country API Lab/Homework
-// Make a select drop down with all the countries,
-// display the country name, population, capital city of the country that is selected.
 // Persist the last country that was selected
 // Style
 // Further: Add new functionality. eg
@@ -20,8 +18,20 @@ window.onload = function(){
   request.onload = function(){
     if(request.status === 200){
       console.log("got the data");
-      // console.log(request.responseText);
       var countries = JSON.parse(request.responseText) || [];
+      // Make a select drop down with all the countries,
+      var option = document.createElement("option");
+      option.value = "None";
+      option.innerText = "choose a country";
+      
+      var select = document.createElement("select");
+      select.name = "country-list";
+      select.id = "country-list";
+
+      select.appendChild(option);
+      var body = document.getElementsByTagName('body')[0];
+      body.appendChild(select);
+      
       var countrySelect = document.getElementById('country-list');
       for(country of countries){      
         var option = document.createElement("option");
@@ -35,8 +45,10 @@ window.onload = function(){
 
   request.send(null);
 
-  
-
+  // display the country name, population, capital city of the country that is selected.
+  var section = document.createElement("section");
+  var body = document.getElementsByTagName('body')[0];
+  body.appendChild(section);
 };
 
 
