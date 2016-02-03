@@ -1,12 +1,4 @@
-// Rest Country API Lab/Homework
-// Style
-// Further: Add new functionality. eg
-
-// Show bordering countries and their statistics.
-// Filter select to only show countries in a region, sub-region.
-
 window.onload = function(){
-  console.log('App started');
   var url = 'https://restcountries.eu/rest/v1';
   var request = new XMLHttpRequest();
 
@@ -26,7 +18,6 @@ window.onload = function(){
   body.appendChild(select);
 
   // Display persisted country info 
-  var body = document.getElementsByTagName('body')[0];
   var section = document.createElement("section");
   body.appendChild(section);
   var countryName = document.createElement("h1");
@@ -84,18 +75,3 @@ window.onload = function(){
   request.send(null);
 
 };
-
-
-      // console.log(countries.length);
-      // var firstCountry = countries[0];
-      // console.log('The first country is', firstCountry.name);
-      // var spanishSpeakers = [];
-      // for(country of countries){
-      //   for(language of country.languages){       
-      //     if(language === "es"){
-      //       spanishSpeakers.push(country);
-      //       console.log('Hablan español en', country.name);
-      //     }
-      //   }
-      // }
-      // console.log('There are', spanishSpeakers.length, 'spanish speaking countries');
