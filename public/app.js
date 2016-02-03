@@ -1,28 +1,32 @@
 window.onload = function(){
   var url = 'https://restcountries.eu/rest/v1';
   var request = new XMLHttpRequest();
+  var body = document.getElementsByTagName('body')[0];
 
   var countryToDisplay = JSON.parse(localStorage.getItem('storedCountry')) || {};
 
-  // Create drop down menu
-  var option = document.createElement("option");
-  option.value = "None";
-  option.innerText = "choose a country";
-  
-  var select = document.createElement("select");
-  select.name = "country-list";
-  select.id = "country-list";
+  var map = new Map({lat: 0, lng: 0}, 1);
 
-  select.appendChild(option);
-  var body = document.getElementsByTagName('body')[0];
-  body.appendChild(select);
+
+  // // Create drop down menu
+  // var option = document.createElement("option");
+  // option.value = "None";
+  // option.innerText = "choose a country";
+  
+  // var select = document.createElement("select");
+  // select.name = "country-list";
+  // select.id = "country-list";
+
+  // select.appendChild(option);
+  // body.appendChild(select);
 
   // Display persisted country info 
   var section = document.createElement("section");
   body.appendChild(section);
-  var countryName = document.createElement("h1");
-  var population = document.createElement("p");
-  var capitalCity = document.createElement("p");
+  var countryName = document.getElementById("countryName");
+  var population = document.getElementById("population");
+  var capitalCity = document.getElementById("capitalCity");
+  var mapDisplay = document.getElementById("map");
   
   if(countryToDisplay != {}){
 
@@ -32,9 +36,8 @@ window.onload = function(){
       population.innerText = "Population: " + Number(country.population).toLocaleString();
       capitalCity.innerText = "Capital City: " + country.capital;
 
-      section.appendChild(countryName);
-      section.appendChild(population);
-      section.appendChild(capitalCity);
+      map.setCentre({lat: country.latlng[0], lng: country.latlng[1]});
+      map.setZoom(2);
   }
 
   request.open("GET", url);
@@ -53,7 +56,7 @@ window.onload = function(){
         countrySelect.appendChild(option);
       }
 
-      select.onchange = function(){
+      countrySelect.onchange = function(){
         var list = document.getElementById("country-list");
         var countryIndex = list.options[list.selectedIndex].value;
         var country = countries[countryIndex];
@@ -61,10 +64,9 @@ window.onload = function(){
         countryName.innerText = country.name;
         population.innerText = "Population: " + Number(country.population).toLocaleString();
         capitalCity.innerText = "Capital City: " + country.capital;
-
-        section.appendChild(countryName);
-        section.appendChild(population);
-        section.appendChild(capitalCity);
+        
+        map.setCentre({lat: country.latlng[0], lng: country.latlng[1]});
+        map.setZoom(2);
 
         countryToDisplay = country;
         localStorage.setItem('storedCountry', JSON.stringify(countryToDisplay));

@@ -3,18 +3,20 @@
   <head>
     <title>Startpoint</title>
     <link rel='stylesheet' type='text/css' href='main.css'>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src='map.js'></script>
     <script src='app.js'></script>
   </head>
   <body>
-<!--     <select name="country-list" id="country-list" placeholder="choose a country">
+    <select name="country-list" id="country-list">
         <option value="None" selected>choose a country</option>
-    </select> -->
-<!--     <section>
-      <h1>Country Name</h1>
-      <p>Population: pop</p>
-      <p>Capital city: cc</p>
-    </section> -->
+    </select>
+    <section>
+      <h1 id='countryName'></h1>
+      <p id='population'></p>
+      <p id='capitalCity'></p>
+      <div id="map"></div>
+    </section>
   </body>
 </html>
 
