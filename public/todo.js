@@ -15,8 +15,6 @@
 // Country Map Lab/Homework (Wednesday)
 // Extending the country application
 
-// Display a map centered on the selected country.
-// Add a marker to the country.
 // Add an info window to the marker displaying the country statistics.
 // Further: Add new Functionality. eg
 

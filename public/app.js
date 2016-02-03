@@ -26,7 +26,7 @@ window.onload = function(){
   var countryName = document.getElementById("countryName");
   var population = document.getElementById("population");
   var capitalCity = document.getElementById("capitalCity");
-  var mapDisplay = document.getElementById("map");
+  // var mapDisplay = document.getElementById("map");
   
   if(countryToDisplay != {}){
 
@@ -36,8 +36,10 @@ window.onload = function(){
       population.innerText = "Population: " + Number(country.population).toLocaleString();
       capitalCity.innerText = "Capital City: " + country.capital;
 
-      map.setCentre({lat: country.latlng[0], lng: country.latlng[1]});
-      map.setZoom(2);
+      var position = {lat: country.latlng[0], lng: country.latlng[1]};
+      map.setCentre(position);
+      map.setZoom(3);
+      var marker = map.addMarker(position, country.name);
   }
 
   request.open("GET", url);
@@ -65,8 +67,12 @@ window.onload = function(){
         population.innerText = "Population: " + Number(country.population).toLocaleString();
         capitalCity.innerText = "Capital City: " + country.capital;
         
-        map.setCentre({lat: country.latlng[0], lng: country.latlng[1]});
-        map.setZoom(2);
+        // Display a map centered on the selected country.
+        var position = {lat: country.latlng[0], lng: country.latlng[1]};
+        map.setCentre(position);
+        map.setZoom(3);
+        // Add a marker to the country.
+        map.addMarker(position, country.name);
 
         countryToDisplay = country;
         localStorage.setItem('storedCountry', JSON.stringify(countryToDisplay));
