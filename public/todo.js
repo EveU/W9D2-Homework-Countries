@@ -15,7 +15,6 @@
 // Country Map Lab/Homework (Wednesday)
 // Extending the country application
 
-// Add an info window to the marker displaying the country statistics.
 // Further: Add new Functionality. eg
 
 // Add a find my country button; displaying the country based on the users location.

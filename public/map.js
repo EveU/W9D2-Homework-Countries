@@ -15,11 +15,13 @@ var Map = function(latLng){
     });
     return marker;
   };
-  // this.clearMarkers = function clearMarkers() {
-  //   // setMapOnAll(null);
-  // }
-  // this.moveMarker = function(marker, latLng, title){
-  //  marker.position = latLng;
-  //  marker.title = title;
-  // }
+  this.addInfoWindow = function(latLng, country){
+    var marker = this.addMarker(latLng, country.name);
+    marker.addListener('click', function(){
+      var infoWindow = new google.maps.InfoWindow({
+        content: "<h2>"+country.name+"</h2>\nCapital City: "+country.capital
+      });
+      infoWindow.open(this.map, marker);
+    });
+  }
 }
